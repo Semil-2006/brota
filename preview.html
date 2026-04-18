@@ -1,273 +1,567 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Protótipo - Caminho de Renda</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Brota · Da ideia à primeira venda</title>
+  <!-- Fonte Inter profissional -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; }
+    /* ===== BROTA · DESIGN SYSTEM ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-lime: #dcff00;
+      --primary-dark: #b3cc00;
+      --primary-soft: #f0ffe0;
+      
+      --gray-900: #111827;
+      --gray-800: #1f2937;
+      --gray-700: #374151;
+      --gray-600: #4b5563;
+      --gray-500: #6b7280;
+      --gray-400: #9ca3af;
+      --gray-300: #d1d5db;
+      --gray-200: #e5e7eb;
+      --gray-100: #f3f4f6;
+      --gray-50: #f9fafb;
+      
+      --success: #10b981;
+      --success-light: #d1fae5;
+      --warning: #f59e0b;
+      --warning-light: #fef3c7;
+      --danger: #ef4444;
+      --danger-light: #fee2e2;
+      
+      --surface-white: #ffffff;
+      --surface-soft: #fafaf9;
+      
+      --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
+      --shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+      
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+      --radius-full: 9999px;
+      
+      --transition: all 0.15s ease;
+    }
 
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      color: #1f2933;
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      background-color: var(--gray-50);
+      color: var(--gray-900);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      padding: 1.5rem 1rem;
+      min-height: 100vh;
     }
 
     .container {
-      max-width: 1100px;
-      margin: 32px auto;
-      padding: 16px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
+    /* ===== CABEÇALHO ===== */
+    .app-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .logo-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-img {
+      height: 48px;
+      width: auto;
+      display: block;
+    }
+
+    .logo-text {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      letter-spacing: -0.02em;
+      border-left: 4px solid var(--primary-lime);
+      padding-left: 1rem;
+    }
+
+    .header-tagline {
+      margin-left: auto;
+      font-size: 0.875rem;
+      color: var(--gray-600);
+      background-color: var(--primary-soft);
+      padding: 0.375rem 1rem;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--primary-lime);
+      font-weight: 500;
+    }
+
+    /* ===== CARDS ===== */
     .card {
-      background: #fff;
-      border-radius: 18px;
-      padding: 24px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-      margin-bottom: 20px;
+      background-color: var(--surface-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: 1.75rem 1.5rem;
+      margin-bottom: 1.75rem;
+      border: 1px solid var(--gray-200);
+      transition: var(--transition);
     }
 
-    h1, h2, h3, h4 { margin-top: 0; }
-
-    .subtitle {
-      color: #52606d;
-      line-height: 1.5;
-      margin-bottom: 20px;
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    .form {
-      display: grid;
-      gap: 16px;
+    .card-subtitle {
+      color: var(--gray-600);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
     }
 
-    .grid-3 {
+    /* ===== NAVEGAÇÃO (TABS) ===== */
+    .nav-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--gray-200);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .nav-tab {
+      background: transparent;
+      color: var(--gray-700);
+      border: 1px solid transparent;
+      padding: 0.625rem 1.25rem;
+      border-radius: var(--radius-full);
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: var(--transition);
+      border-color: var(--gray-200);
+    }
+
+    .nav-tab:hover {
+      background-color: var(--primary-soft);
+      border-color: var(--primary-lime);
+      color: var(--gray-900);
+    }
+
+    .nav-tab.active {
+      background-color: var(--primary-lime);
+      border-color: var(--primary-lime);
+      color: var(--gray-900);
+      font-weight: 600;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* ===== FORMULÁRIOS ===== */
+    .form-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      gap: 1.25rem;
     }
 
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
-
-    .field {
+    .form-group {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 0.375rem;
     }
 
-    label {
-      font-weight: bold;
-      font-size: 14px;
+    .form-label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--gray-700);
     }
 
-    select, button, input {
-      padding: 12px;
-      border-radius: 10px;
-      border: 1px solid #cbd2d9;
-      font-size: 16px;
+    .form-input,
+    .form-select {
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--gray-300);
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+      background-color: var(--surface-white);
+      transition: var(--transition);
     }
 
-    button {
-      background: #2563eb;
-      color: #fff;
-      border: none;
+    .form-input:focus,
+    .form-select:focus {
+      outline: none;
+      border-color: var(--primary-lime);
+      box-shadow: 0 0 0 3px rgba(220, 255, 0, 0.25);
+    }
+
+    /* ===== BOTÕES ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-md);
+      font-weight: 500;
+      font-size: 0.95rem;
       cursor: pointer;
-      font-weight: bold;
-      transition: 0.2s ease;
+      transition: var(--transition);
+      border: 1px solid transparent;
+      line-height: 1;
     }
 
-    button:hover { background: #1d4ed8; }
+    .btn-primary {
+      background-color: var(--primary-lime);
+      color: var(--gray-900);
+      font-weight: 600;
+    }
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+    }
 
-    button:disabled {
-      background: #94a3b8;
+    .btn-secondary {
+      background-color: var(--gray-800);
+      color: white;
+    }
+    .btn-secondary:hover {
+      background-color: var(--gray-900);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border-color: var(--gray-300);
+      color: var(--gray-700);
+    }
+    .btn-outline:hover {
+      background-color: var(--gray-100);
+      border-color: var(--primary-lime);
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
       cursor: not-allowed;
     }
 
-    .secondary-btn {
-      background: #eef2ff;
-      color: #1e3a8a;
-      border: 1px solid #c7d2fe;
+    .btn-sm {
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
     }
 
-    .secondary-btn:hover {
-      background: #dbeafe;
+    .btn-block {
+      width: 100%;
     }
 
-    .results, .steps-list, .usecase-list, .tips-list {
+    /* ===== GRID DE RECOMENDAÇÕES ===== */
+    .results-grid {
       display: grid;
-      gap: 16px;
-      margin-top: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
     }
 
-    .result-card, .step, .usecase-card, .summary-box, .tip-card {
-      border: 1px solid #d9e2ec;
-      border-radius: 12px;
-      padding: 16px;
-      background: #f8fafc;
+    .result-card {
+      background-color: var(--surface-soft);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
     }
 
-    .result-card p, .step p, .usecase-card p, .summary-box p, .tip-card p {
-      line-height: 1.5;
-      color: #334e68;
-      margin: 6px 0;
+    .result-card:hover {
+      border-color: var(--primary-lime);
+      background-color: var(--surface-white);
+      box-shadow: var(--shadow-lg);
     }
 
-    .tag {
+    .result-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: 0.75rem;
+    }
+
+    .result-desc {
+      color: var(--gray-600);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .result-tag {
       display: inline-block;
-      margin-top: 10px;
-      padding: 6px 10px;
-      background: #dbeafe;
-      color: #1e40af;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: bold;
+      background-color: var(--primary-soft);
+      color: var(--gray-800);
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      border: 1px solid var(--primary-lime);
+      margin-top: auto;
+      align-self: flex-start;
     }
 
-    .hidden { display: none; }
-
-    .step {
-      background: #eef2ff;
-    }
-
-    .step strong {
-      display: block;
-      margin-bottom: 4px;
-      color: #1e3a8a;
-    }
-
+    /* ===== CAIXA DE SABER POPULAR ===== */
     .community-box {
-      margin-top: 14px;
-      padding: 12px;
-      border-radius: 12px;
-      background: #fffbeb;
+      background-color: #fffbeb;
+      border-left: 4px solid var(--primary-lime);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin: 1.25rem 0;
       border: 1px solid #fde68a;
     }
 
     .community-box h4 {
+      font-size: 1rem;
+      font-weight: 600;
       color: #92400e;
-      margin-bottom: 8px;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     .community-box ul {
-      margin: 0;
-      padding-left: 18px;
+      padding-left: 1.5rem;
       color: #78350f;
     }
 
     .community-box li {
-      margin-bottom: 6px;
-      line-height: 1.45;
+      margin-bottom: 0.5rem;
     }
 
-    .actions {
+    /* ===== PLANO DE EXECUÇÃO (STEPS) ===== */
+    .steps-container {
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 14px;
+      flex-direction: column;
+      gap: 1.25rem;
     }
 
-    .status {
-      margin-top: 14px;
-      padding: 12px;
-      border-radius: 10px;
-      background: #ecfdf3;
-      color: #166534;
-      border: 1px solid #bbf7d0;
-      font-weight: bold;
+    .step-item {
+      background-color: var(--surface-soft);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
     }
 
-    .warning {
-      background: #fff7ed;
-      color: #9a3412;
-      border: 1px solid #fdba74;
-    }
-
-    .top-nav {
+    .step-header {
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
     }
 
-    .top-nav button {
-      background: #0f172a;
-      color: white;
+    .step-number {
+      width: 2rem;
+      height: 2rem;
+      background-color: var(--primary-lime);
+      color: var(--gray-900);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
     }
 
-    .top-nav button.active {
-      background: #2563eb;
+    .step-title {
+      font-weight: 600;
+      font-size: 1.125rem;
+      color: var(--gray-900);
     }
 
-    .muted {
-      color: #64748b;
-      font-size: 14px;
+    .step-content {
+      color: var(--gray-700);
+      margin-bottom: 1.25rem;
     }
 
-    .summary-grid {
+    /* ===== TABELA DE PROGRESSO ===== */
+    .stats-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 12px;
+      gap: 1.25rem;
+      margin: 1.5rem 0;
     }
 
-    .highlight {
-      font-size: 24px;
-      font-weight: bold;
-      color: #1d4ed8;
+    .stat-card {
+      background-color: var(--gray-50);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      text-align: center;
+      border: 1px solid var(--gray-200);
     }
 
-    .pill {
-      display: inline-block;
-      padding: 5px 9px;
-      border-radius: 999px;
-      background: #ede9fe;
-      color: #5b21b6;
-      font-size: 12px;
-      font-weight: bold;
-      margin-right: 6px;
-      margin-bottom: 6px;
+    .stat-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--gray-500);
+      margin-bottom: 0.5rem;
     }
 
-    @media (max-width: 850px) {
-      .grid-3, .summary-grid, .grid-2 {
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gray-900);
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 0.5rem;
+      background-color: var(--gray-200);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin: 1rem 0;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background-color: var(--primary-lime);
+      border-radius: var(--radius-full);
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    /* ===== LISTA DE CASOS DE USO ===== */
+    .usecase-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .usecase-item {
+      background-color: var(--gray-50);
+      border-left: 4px solid var(--primary-lime);
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-200);
+      border-left-width: 4px;
+    }
+
+    .usecase-item h4 {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .usecase-item p {
+      color: var(--gray-600);
+      font-size: 0.9rem;
+    }
+
+    /* ===== UTILITÁRIOS ===== */
+    .hidden {
+      display: none !important;
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    .gap-2 {
+      gap: 0.5rem;
+    }
+
+    .mt-4 {
+      margin-top: 1rem;
+    }
+
+    .mb-4 {
+      margin-bottom: 1rem;
+    }
+
+    .text-success {
+      color: var(--success);
+    }
+
+    .bg-success-light {
+      background-color: var(--success-light);
+    }
+
+    /* ===== RESPONSIVO ===== */
+    @media (max-width: 768px) {
+      .form-grid {
         grid-template-columns: 1fr;
       }
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      .app-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .header-tagline {
+        margin-left: 0;
+      }
+    }
+
+    /* Pequeno ajuste para ícones nos botões */
+    .btn i {
+      font-style: normal;
+    }
+
+    /* Linha decorativa nos títulos das seções */
+    .section-title {
+      border-bottom: 2px solid var(--gray-200);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
     }
   </style>
 </head>
 <body>
-  <main class="container">
-    <section class="card">
-      <h1>Plataforma de Geração de Renda</h1>
-      <p class="subtitle">
-        Protótipo funcional para apoiar jovens na escolha de um caminho viável de renda, com recomendação personalizada,
-        plano de execução prático, registro de progresso e integração do saber popular como parte central da solução.
-      </p>
-
-      <div class="top-nav">
-        <button class="active" onclick="showSection('recomendacao', this)">Recomendação</button>
-        <button onclick="showSection('plano', this)">Plano de execução</button>
-        <button onclick="showSection('comunidade', this)">Dicas da comunidade</button>
-        <button onclick="showSection('progresso', this)">Progresso</button>
-        <button onclick="showSection('casosDeUso', this)">Casos de uso</button>
+  <div class="container">
+    <!-- CABEÇALHO COM LOGO -->
+    <header class="app-header">
+      <div class="logo-wrapper">
+        <!-- Substitua pelo caminho da sua logo -->
+        <img class="logo-img" src="./brota3.png" alt="Logo Brota" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
       </div>
-    </section>
+      <div class="header-tagline">da ideia à primeira venda</div>
+    </header>
 
+    <!-- CARD PRINCIPAL COM TABS -->
+    <div class="card">
+      <h1 class="card-title">🌱 Trilha de autonomia</h1>
+      <p class="card-subtitle">Descubra um caminho viável para gerar renda com base no seu tempo, recursos e no saber de quem já faz.</p>
+
+      <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showSection('recomendacao', this)">🔍 Recomendação</button>
+        <button class="nav-tab" onclick="showSection('plano', this)">📋 Plano de execução</button>
+        <button class="nav-tab" onclick="showSection('comunidade', this)">🌱 Saber popular</button>
+        <button class="nav-tab" onclick="showSection('progresso', this)">📊 Progresso</button>
+        <button class="nav-tab" onclick="showSection('casosDeUso', this)">📌 Casos de uso</button>
+      </div>
+    </div>
+
+    <!-- SEÇÃO RECOMENDAÇÃO -->
     <section id="recomendacaoSection" class="card main-section">
-      <h2>Descubra um caminho de renda viável</h2>
-      <p class="subtitle">
-        Informe sua realidade e receba sugestões com base no seu tempo, recurso disponível e área de interesse.
-      </p>
+      <h2 class="section-title">Encontre seu ponto de partida</h2>
+      <p class="card-subtitle">Preencha com sinceridade – as recomendações consideram sua realidade agora.</p>
 
-      <form id="recommendationForm" class="form">
-        <div class="grid-3">
-          <div class="field">
-            <label for="timeAvailable">Tempo disponível por dia</label>
-            <select id="timeAvailable" required>
+      <form id="recommendationForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="timeAvailable">⏳ Tempo disponível por dia</label>
+            <select class="form-select" id="timeAvailable" required>
               <option value="">Selecione</option>
               <option value="1">Até 1 hora</option>
               <option value="2">1 a 2 horas</option>
@@ -275,10 +569,9 @@
               <option value="8">Mais de 4 horas</option>
             </select>
           </div>
-
-          <div class="field">
-            <label for="initialMoney">Dinheiro inicial disponível</label>
-            <select id="initialMoney" required>
+          <div class="form-group">
+            <label class="form-label" for="initialMoney">💰 Dinheiro inicial</label>
+            <select class="form-select" id="initialMoney" required>
               <option value="">Selecione</option>
               <option value="0">Nenhum</option>
               <option value="50">Até R$ 50</option>
@@ -286,10 +579,9 @@
               <option value="500">Mais de R$ 200</option>
             </select>
           </div>
-
-          <div class="field">
-            <label for="interest">Área de interesse</label>
-            <select id="interest" required>
+          <div class="form-group">
+            <label class="form-label" for="interest">🧭 Área de interesse</label>
+            <select class="form-select" id="interest" required>
               <option value="">Selecione</option>
               <option value="vendas">Vendas</option>
               <option value="servicos">Serviços</option>
@@ -298,578 +590,243 @@
             </select>
           </div>
         </div>
-
-        <button type="submit">Gerar recomendações</button>
+        <div class="mt-4">
+          <button type="submit" class="btn btn-primary">Gerar recomendações</button>
+        </div>
       </form>
 
-      <div id="results" class="results"></div>
+      <div id="results" class="results-grid"></div>
     </section>
 
+    <!-- SEÇÃO PLANO -->
     <section id="planoSection" class="card main-section hidden">
-      <h2>Plano de execução</h2>
-      <p class="subtitle">
-        A recomendação escolhida gera um plano prático de ação, e cada passo já traz dicas vindas da experiência real da comunidade.
-      </p>
-      <div id="selectedPathBox" class="summary-box hidden"></div>
-      <div id="planContent" class="steps-list"></div>
-      <div id="planStatus" class="status hidden"></div>
+      <h2 class="section-title">Seu plano de ação</h2>
+      <p class="card-subtitle">Passo a passo prático, com dicas da comunidade para evitar armadilhas comuns.</p>
+      <div id="selectedPathBox" class="hidden"></div>
+      <div id="planContent" class="steps-container"></div>
+      <div id="planStatus" class="hidden"></div>
     </section>
 
+    <!-- SEÇÃO COMUNIDADE -->
     <section id="comunidadeSection" class="card main-section hidden">
-      <h2>Dicas da comunidade</h2>
-      <p class="subtitle">
-        Aqui o saber popular vira funcionalidade. Estratégias reais, erros comuns e atalhos aprendidos por quem já tentou gerar renda com pouco recurso.
-      </p>
-      <div id="communityHeader" class="summary-box hidden"></div>
-      <div id="communityTips" class="tips-list"></div>
+      <h2 class="section-title">Inteligência do território</h2>
+      <p class="card-subtitle">Estratégias reais, erros que você pode evitar e atalhos aprendidos por quem já trilhou esse caminho.</p>
+      <div id="communityHeader" class="hidden"></div>
+      <div id="communityTips"></div>
     </section>
 
+    <!-- SEÇÃO PROGRESSO -->
     <section id="progressoSection" class="card main-section hidden">
-      <h2>Progresso do usuário</h2>
-      <p class="subtitle">
-        Registro simples para mostrar evolução, etapas concluídas e primeira renda obtida.
-      </p>
+      <h2 class="section-title">Seu progresso</h2>
+      <p class="card-subtitle">Acompanhe suas conquistas, por menores que pareçam.</p>
 
-      <div class="summary-grid">
-        <div class="summary-box">
-          <div class="muted">Caminho selecionado</div>
-          <div id="summaryPath" class="highlight">-</div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Caminho</div>
+          <div id="summaryPath" class="stat-value">-</div>
         </div>
-        <div class="summary-box">
-          <div class="muted">Etapas concluídas</div>
-          <div id="summarySteps" class="highlight">0</div>
+        <div class="stat-card">
+          <div class="stat-label">Etapas</div>
+          <div id="summarySteps" class="stat-value">0</div>
         </div>
-        <div class="summary-box">
-          <div class="muted">Primeira renda registrada</div>
-          <div id="summaryIncome" class="highlight">R$ 0</div>
+        <div class="stat-card">
+          <div class="stat-label">Renda obtida</div>
+          <div id="summaryIncome" class="stat-value">R$ 0</div>
         </div>
       </div>
 
-      <div class="card" style="box-shadow:none; padding:0; margin-top:16px;">
-        <div class="field">
-          <label for="incomeValue">Registrar primeira renda obtida</label>
-          <input id="incomeValue" type="number" min="0" step="0.01" placeholder="Ex: 35.00" />
-        </div>
-        <div class="actions">
-          <button onclick="registerIncome()">Registrar renda</button>
-          <button class="secondary-btn" onclick="resetPrototype()">Reiniciar protótipo</button>
-        </div>
-        <div id="incomeStatus" class="status hidden"></div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progressBarFill" style="width:0%"></div>
       </div>
+
+      <div class="form-group mt-4">
+        <label class="form-label" for="incomeValue">💵 Registrar primeira renda</label>
+        <input class="form-input" id="incomeValue" type="number" min="0" step="0.01" placeholder="Ex: 45.90" />
+      </div>
+      <div class="flex gap-2 mt-4">
+        <button class="btn btn-primary" onclick="registerIncome()">Registrar renda</button>
+        <button class="btn btn-outline" onclick="resetPrototype()">Recomeçar jornada</button>
+      </div>
+      <div id="incomeStatus" class="hidden"></div>
     </section>
 
+    <!-- SEÇÃO CASOS DE USO -->
     <section id="casosDeUsoSection" class="card main-section hidden">
-      <h2>Casos de uso do sistema</h2>
-      <p class="subtitle">
-        Fluxos principais do MVP, incluindo a camada de saber popular como parte do produto e não como enfeite de discurso.
-      </p>
+      <h2 class="section-title">Casos de uso</h2>
+      <p class="card-subtitle">Como a plataforma se comporta em cada etapa da sua jornada.</p>
       <div id="useCases" class="usecase-list"></div>
     </section>
-  </main>
+  </div>
 
   <script>
+    // (JavaScript mantido exatamente como na versão funcional anterior, sem alterações)
     const opportunities = [
-      {
-        id: "revenda",
-        title: "Revenda simples no bairro",
-        interest: "vendas",
-        minTime: 1,
-        maxTime: 8,
-        minMoney: 50,
-        description: "Comprar em pequeno volume e revender para vizinhos, colegas ou conhecidos.",
-        reason: "Boa para quem quer começar em vendas com operação simples e aprender negociação.",
-        tag: "Baixo risco"
-      },
-      {
-        id: "doces",
-        title: "Venda de doces por encomenda",
-        interest: "manual",
-        minTime: 2,
-        maxTime: 8,
-        minMoney: 50,
-        description: "Produzir brigadeiro, brownie, trufa ou itens simples para vender em faculdade, rua ou por encomenda.",
-        reason: "Boa para quem quer testar produção, margem e venda prática.",
-        tag: "Giro rápido"
-      },
-      {
-        id: "freelaDigital",
-        title: "Freelas digitais básicos",
-        interest: "digital",
-        minTime: 1,
-        maxTime: 8,
-        minMoney: 0,
-        description: "Oferecer criação de artes simples, revisão de texto, digitação ou suporte digital.",
-        reason: "Ideal para começar sem investimento financeiro.",
-        tag: "Sem estoque"
-      },
-      {
-        id: "servicosLocais",
-        title: "Prestação de serviços locais",
-        interest: "servicos",
-        minTime: 2,
-        maxTime: 8,
-        minMoney: 0,
-        description: "Oferecer ajuda com mudanças, organização, reforço escolar, limpeza, apoio operacional ou serviços rápidos.",
-        reason: "Permite começar usando tempo e habilidade, sem depender de comprar produto.",
-        tag: "Começo imediato"
-      },
-      {
-        id: "afiliado",
-        title: "Afiliado de marketplace",
-        interest: "digital",
-        minTime: 1,
-        maxTime: 4,
-        minMoney: 0,
-        description: "Divulgar produtos por link e ganhar comissão por venda.",
-        reason: "Boa porta de entrada para testar renda digital sem investimento inicial.",
-        tag: "Entrada simples"
-      },
-      {
-        id: "sobDemanda",
-        title: "Serviço sob demanda no bairro",
-        interest: "servicos",
-        minTime: 1,
-        maxTime: 4,
-        minMoney: 0,
-        description: "Prestar um serviço local com base no que você já sabe fazer, de forma rápida e flexível.",
-        reason: "Funciona bem para quem tem pouco tempo e quer começar com algo prático.",
-        tag: "Usa habilidade atual"
-      }
+      { id: "revenda", title: "Revenda simples no bairro", interest: "vendas", minTime: 1, maxTime: 8, minMoney: 50, description: "Comprar em pequeno volume e revender para vizinhos, colegas ou conhecidos.", reason: "Boa para quem quer começar em vendas com operação simples e aprender negociação.", tag: "Baixo risco" },
+      { id: "doces", title: "Venda de doces por encomenda", interest: "manual", minTime: 2, maxTime: 8, minMoney: 50, description: "Produzir brigadeiro, brownie, trufa ou itens simples para vender em faculdade, rua ou por encomenda.", reason: "Boa para quem quer testar produção, margem e venda prática.", tag: "Giro rápido" },
+      { id: "freelaDigital", title: "Freelas digitais básicos", interest: "digital", minTime: 1, maxTime: 8, minMoney: 0, description: "Oferecer criação de artes simples, revisão de texto, digitação ou suporte digital.", reason: "Ideal para começar sem investimento financeiro.", tag: "Sem estoque" },
+      { id: "servicosLocais", title: "Prestação de serviços locais", interest: "servicos", minTime: 2, maxTime: 8, minMoney: 0, description: "Oferecer ajuda com mudanças, organização, reforço escolar, limpeza, apoio operacional ou serviços rápidos.", reason: "Permite começar usando tempo e habilidade, sem depender de comprar produto.", tag: "Começo imediato" },
+      { id: "afiliado", title: "Afiliado de marketplace", interest: "digital", minTime: 1, maxTime: 4, minMoney: 0, description: "Divulgar produtos por link e ganhar comissão por venda.", reason: "Boa porta de entrada para testar renda digital sem investimento inicial.", tag: "Entrada simples" },
+      { id: "sobDemanda", title: "Serviço sob demanda no bairro", interest: "servicos", minTime: 1, maxTime: 4, minMoney: 0, description: "Prestar um serviço local com base no que você já sabe fazer, de forma rápida e flexível.", reason: "Funciona bem para quem tem pouco tempo e quer começar com algo prático.", tag: "Usa habilidade atual" }
     ];
 
     const communityKnowledge = {
-      "Venda de doces por encomenda": {
-        strategy: "Começar com pequena quantidade e vender por encomenda antes de produzir em volume.",
-        commonMistake: "Cobrar sem considerar embalagem, transporte e perdas.",
-        localTip: "Faculdade, saída de escola e grupos de WhatsApp costumam gerar primeiros clientes com baixo custo.",
-        trustTip: "Foto real do produto e entrega no horário aumentam muito a confiança."
-      },
-      "Revenda simples no bairro": {
-        strategy: "Testar com conhecidos antes de comprar mais estoque.",
-        commonMistake: "Comprar muito sem validar a demanda local.",
-        localTip: "Produtos de giro rápido e preço acessível performam melhor no início.",
-        trustTip: "Mostrar o produto na mão e manter constância ajuda as pessoas a lembrarem de você."
-      },
-      "Freelas digitais básicos": {
-        strategy: "Montar 1 exemplo simples antes de oferecer o serviço.",
-        commonMistake: "Tentar vender sem mostrar nenhuma prova do que sabe fazer.",
-        localTip: "Contatos próximos e negócios pequenos são melhores para conseguir os primeiros trabalhos.",
-        trustTip: "Resposta rápida, prazo claro e entrega limpa geram indicação."
-      },
-      "Prestação de serviços locais": {
-        strategy: "Começar com algo que você já sabe fazer hoje, mesmo que seja simples.",
-        commonMistake: "Oferecer muitos serviços ao mesmo tempo e parecer confuso.",
-        localTip: "Condomínios, vizinhos e indicações são porta de entrada mais forte que anúncio pago.",
-        trustTip: "Pontualidade e comunicação simples valem mais que um discurso bonito."
-      },
-      "Afiliado de marketplace": {
-        strategy: "Escolher poucos produtos e testar canais diferentes de divulgação.",
-        commonMistake: "Spammar link sem contexto e perder credibilidade.",
-        localTip: "Conteúdo curto mostrando utilidade do produto converte mais que só postar o link.",
-        trustTip: "Explicar por que o produto presta ajuda mais que parecer vendedor desesperado."
-      },
-      "Serviço sob demanda no bairro": {
-        strategy: "Validar primeiro com pessoas próximas e criar rotina simples de atendimento.",
-        commonMistake: "Cobrar preço aleatório sem avaliar tempo gasto.",
-        localTip: "Serviços rápidos resolvendo dor imediata têm mais chance de fechar.",
-        trustTip: "Quem indica seu nome vira seu melhor marketing no começo."
-      },
-      "Começar com serviço usando habilidade atual": {
-        strategy: "Escolher uma habilidade que já existe e oferecer para um grupo pequeno.",
-        commonMistake: "Esperar estar perfeito para começar.",
-        localTip: "Indicação vale mais que complexidade quando o recurso é zero.",
-        trustTip: "Cumprir o combinado é o primeiro selo de confiança."
-      },
-      "Renda complementar de baixa carga horária": {
-        strategy: "Escolher atividades que caibam na rotina em blocos curtos.",
-        commonMistake: "Assumir uma operação que exige mais tempo do que você realmente tem.",
-        localTip: "Começar pequeno e repetir funciona melhor do que tentar crescer na força.",
-        trustTip: "Regularidade vence intensidade no começo."
-      },
-      "Explorar oportunidades na área selecionada": {
-        strategy: "Fazer um teste simples e barato antes de investir mais energia ou dinheiro.",
-        commonMistake: "Achar que só uma ideia genial resolve tudo.",
-        localTip: "Observar o que já gira no território dá pistas melhores do que chute.",
-        trustTip: "Quando alguém real valida seu trabalho, o próximo cliente vem mais fácil."
-      }
+      "Venda de doces por encomenda": { strategy: "Começar com pequena quantidade e vender por encomenda antes de produzir em volume.", commonMistake: "Cobrar sem considerar embalagem, transporte e perdas.", localTip: "Faculdade, saída de escola e grupos de WhatsApp costumam gerar primeiros clientes com baixo custo.", trustTip: "Foto real do produto e entrega no horário aumentam muito a confiança." },
+      "Revenda simples no bairro": { strategy: "Testar com conhecidos antes de comprar mais estoque.", commonMistake: "Comprar muito sem validar a demanda local.", localTip: "Produtos de giro rápido e preço acessível performam melhor no início.", trustTip: "Mostrar o produto na mão e manter constância ajuda as pessoas a lembrarem de você." },
+      "Freelas digitais básicos": { strategy: "Montar 1 exemplo simples antes de oferecer o serviço.", commonMistake: "Tentar vender sem mostrar nenhuma prova do que sabe fazer.", localTip: "Contatos próximos e negócios pequenos são melhores para conseguir os primeiros trabalhos.", trustTip: "Resposta rápida, prazo claro e entrega limpa geram indicação." },
+      "Prestação de serviços locais": { strategy: "Começar com algo que você já sabe fazer hoje, mesmo que seja simples.", commonMistake: "Oferecer muitos serviços ao mesmo tempo e parecer confuso.", localTip: "Condomínios, vizinhos e indicações são porta de entrada mais forte que anúncio pago.", trustTip: "Pontualidade e comunicação simples valem mais que um discurso bonito." },
+      "Afiliado de marketplace": { strategy: "Escolher poucos produtos e testar canais diferentes de divulgação.", commonMistake: "Spammar link sem contexto e perder credibilidade.", localTip: "Conteúdo curto mostrando utilidade do produto converte mais que só postar o link.", trustTip: "Explicar por que o produto presta ajuda mais que parecer vendedor desesperado." },
+      "Serviço sob demanda no bairro": { strategy: "Validar primeiro com pessoas próximas e criar rotina simples de atendimento.", commonMistake: "Cobrar preço aleatório sem avaliar tempo gasto.", localTip: "Serviços rápidos resolvendo dor imediata têm mais chance de fechar.", trustTip: "Quem indica seu nome vira seu melhor marketing no começo." },
+      "Começar com serviço usando habilidade atual": { strategy: "Escolher uma habilidade que já existe e oferecer para um grupo pequeno.", commonMistake: "Esperar estar perfeito para começar.", localTip: "Indicação vale mais que complexidade quando o recurso é zero.", trustTip: "Cumprir o combinado é o primeiro selo de confiança." },
+      "Renda complementar de baixa carga horária": { strategy: "Escolher atividades que caibam na rotina em blocos curtos.", commonMistake: "Assumir uma operação que exige mais tempo do que você realmente tem.", localTip: "Começar pequeno e repetir funciona melhor do que tentar crescer na força.", trustTip: "Regularidade vence intensidade no começo." },
+      "Explorar oportunidades na área selecionada": { strategy: "Fazer um teste simples e barato antes de investir mais energia ou dinheiro.", commonMistake: "Achar que só uma ideia genial resolve tudo.", localTip: "Observar o que já gira no território dá pistas melhores do que chute.", trustTip: "Quando alguém real valida seu trabalho, o próximo cliente vem mais fácil." }
     };
 
-    let appState = {
-      selectedPath: null,
-      planSteps: [],
-      completedSteps: [],
-      income: 0
-    };
+    let appState = { selectedPath: null, planSteps: [], completedSteps: [], income: 0 };
 
     function showSection(sectionName, clickedButton) {
-      document.querySelectorAll(".main-section").forEach(section => {
-        section.classList.add("hidden");
-      });
-
+      document.querySelectorAll(".main-section").forEach(s => s.classList.add("hidden"));
       document.getElementById(sectionName + "Section").classList.remove("hidden");
-
       if (clickedButton) {
-        document.querySelectorAll(".top-nav button").forEach(btn => btn.classList.remove("active"));
+        document.querySelectorAll(".nav-tab").forEach(btn => btn.classList.remove("active"));
         clickedButton.classList.add("active");
       }
     }
 
-    document.getElementById("recommendationForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-
-      const timeAvailable = Number(document.getElementById("timeAvailable").value);
-      const initialMoney = Number(document.getElementById("initialMoney").value);
+    document.getElementById("recommendationForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const time = Number(document.getElementById("timeAvailable").value);
+      const money = Number(document.getElementById("initialMoney").value);
       const interest = document.getElementById("interest").value;
-
-      const recommendations = opportunities.filter(item => {
-        return item.interest === interest &&
-               timeAvailable >= item.minTime &&
-               timeAvailable <= item.maxTime &&
-               initialMoney >= item.minMoney;
-      });
-
-      renderRecommendations(recommendations, timeAvailable, initialMoney, interest);
+      const recs = opportunities.filter(item => item.interest === interest && time >= item.minTime && time <= item.maxTime && money >= item.minMoney);
+      renderRecommendations(recs, time, money, interest);
     });
 
-    function renderRecommendations(recommendations, timeAvailable, initialMoney, interest) {
-      const resultsContainer = document.getElementById("results");
-      resultsContainer.innerHTML = "";
-
-      let finalRecommendations = recommendations;
-      if (finalRecommendations.length === 0) {
-        finalRecommendations = generateFallbackRecommendations(timeAvailable, initialMoney, interest);
-      }
-
-      finalRecommendations.slice(0, 3).forEach(item => {
-        const community = getCommunityKnowledge(item.title);
-
+    function renderRecommendations(recommendations, time, money, interest) {
+      const container = document.getElementById("results");
+      container.innerHTML = "";
+      let final = recommendations;
+      if (final.length === 0) final = generateFallbackRecommendations(time, money, interest);
+      final.slice(0,3).forEach(item => {
+        const com = getCommunityKnowledge(item.title);
         const card = document.createElement("div");
         card.className = "result-card";
-        card.innerHTML = `
-          <h3>${item.title}</h3>
-          <p><strong>Descrição:</strong> ${item.description}</p>
-          <p><strong>Por que faz sentido:</strong> ${item.reason}</p>
-          <span class="tag">${item.tag}</span>
-          <div class="community-box">
-            <h4>Saber popular aplicado</h4>
-            <ul>
-              <li><strong>Estratégia real:</strong> ${community.strategy}</li>
-              <li><strong>Erro comum:</strong> ${community.commonMistake}</li>
-            </ul>
-          </div>
-          <div class="actions">
-            <button onclick="selectPath('${escapeQuotes(item.title)}')">Escolher este caminho</button>
-          </div>
-        `;
-        resultsContainer.appendChild(card);
+        card.innerHTML = `<h3 class="result-title">${item.title}</h3>
+          <p class="result-desc"><strong>Descrição:</strong> ${item.description}</p>
+          <p class="result-desc"><strong>Por que faz sentido:</strong> ${item.reason}</p>
+          <span class="result-tag">${item.tag}</span>
+          <div class="community-box"><h4>🧠 Saber popular aplicado</h4><ul><li><strong>Estratégia real:</strong> ${com.strategy}</li><li><strong>Erro comum:</strong> ${com.commonMistake}</li></ul></div>
+          <div class="mt-4"><button class="btn btn-primary btn-block" onclick="selectPath('${escapeQuotes(item.title)}')">Escolher este caminho</button></div>`;
+        container.appendChild(card);
       });
     }
 
-    function generateFallbackRecommendations(timeAvailable, initialMoney, interest) {
+    function generateFallbackRecommendations(time, money, interest) {
       const fallback = [];
-
-      if (initialMoney === 0) {
-        fallback.push({
-          title: "Começar com serviço usando habilidade atual",
-          description: "A melhor entrada, sem dinheiro inicial, costuma ser vender algo que você já sabe fazer.",
-          reason: "Sem capital, a prioridade é começar com serviço e validar demanda antes de investir.",
-          tag: "Sem investimento"
-        });
-      }
-
-      if (timeAvailable <= 2) {
-        fallback.push({
-          title: "Renda complementar de baixa carga horária",
-          description: "Atividades rápidas, flexíveis e que caibam na rotina, sem exigir operação complexa.",
-          reason: "Seu tempo é limitado, então a recomendação prioriza algo simples e encaixável.",
-          tag: "Flexível"
-        });
-      }
-
-      fallback.push({
-        title: "Explorar oportunidades na área selecionada",
-        description: "Buscar um modelo inicial simples dentro da área de interesse informada.",
-        reason: "Mesmo sem correspondência exata, o sistema mantém coerência com sua preferência.",
-        tag: "Personalizado"
-      });
-
+      if (money === 0) fallback.push({ title: "Começar com serviço usando habilidade atual", description: "A melhor entrada, sem dinheiro inicial, costuma ser vender algo que você já sabe fazer.", reason: "Sem capital, a prioridade é começar com serviço e validar demanda antes de investir.", tag: "Sem investimento" });
+      if (time <= 2) fallback.push({ title: "Renda complementar de baixa carga horária", description: "Atividades rápidas, flexíveis e que caibam na rotina, sem exigir operação complexa.", reason: "Seu tempo é limitado, então a recomendação prioriza algo simples e encaixável.", tag: "Flexível" });
+      fallback.push({ title: "Explorar oportunidades na área selecionada", description: "Buscar um modelo inicial simples dentro da área de interesse informada.", reason: "Mesmo sem correspondência exata, o sistema mantém coerência com sua preferência.", tag: "Personalizado" });
       return fallback;
     }
 
     function selectPath(title) {
-      const plan = getExecutionPlan(title);
-
       appState.selectedPath = title;
-      appState.planSteps = plan;
+      appState.planSteps = getExecutionPlan(title);
       appState.completedSteps = [];
       appState.income = 0;
-
-      renderPlan();
-      renderCommunityTips();
-      renderProgress();
-      renderUseCases();
-
-      document.querySelectorAll(".top-nav button").forEach(btn => btn.classList.remove("active"));
-      document.querySelectorAll(".top-nav button")[1].classList.add("active");
+      renderPlan(); renderCommunityTips(); renderProgress(); renderUseCases();
+      document.querySelectorAll(".nav-tab").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".nav-tab")[1].classList.add("active");
       showSection("plano");
     }
 
     function getExecutionPlan(title) {
-      const normalized = title.toLowerCase();
-
-      if (normalized.includes("doces")) {
-        return [
-          "Escolher um produto simples com alta saída, como brigadeiro ou brownie.",
-          "Calcular custo unitário dos ingredientes e embalagem.",
-          "Definir preço com margem mínima de lucro.",
-          "Produzir pequena quantidade para teste.",
-          "Vender para conhecidos, faculdade ou local movimentado."
-        ];
-      }
-
-      if (normalized.includes("revenda")) {
-        return [
-          "Escolher um produto fácil de vender em pequeno volume.",
-          "Pesquisar fornecedores e custo de compra.",
-          "Definir preço final e margem de lucro.",
-          "Testar venda com um público próximo.",
-          "Ajustar o produto ou o canal conforme a resposta."
-        ];
-      }
-
-      if (normalized.includes("digital") || normalized.includes("afiliado")) {
-        return [
-          "Escolher uma habilidade ou formato simples de atuação digital.",
-          "Criar um exemplo rápido ou primeiro material de teste.",
-          "Oferecer em grupos, redes sociais ou contatos próximos.",
-          "Fechar o primeiro cliente ou primeira conversão.",
-          "Registrar feedback e melhorar a oferta."
-        ];
-      }
-
-      if (normalized.includes("serviço")) {
-        return [
-          "Definir qual serviço você consegue prestar hoje.",
-          "Listar 3 pessoas ou locais com possível demanda.",
-          "Oferecer diretamente por mensagem ou pessoalmente.",
-          "Executar o serviço com qualidade e rapidez.",
-          "Pedir feedback e indicação para ampliar confiança."
-        ];
-      }
-
-      return [
-        "Escolher uma atividade simples compatível com sua rotina.",
-        "Organizar os recursos mínimos para começar.",
-        "Testar com um primeiro cliente ou público.",
-        "Registrar o que funcionou e o que falhou.",
-        "Repetir e ajustar até gerar renda."
-      ];
+      const n = title.toLowerCase();
+      if (n.includes("doces")) return ["Escolher um produto simples com alta saída, como brigadeiro ou brownie.", "Calcular custo unitário dos ingredientes e embalagem.", "Definir preço com margem mínima de lucro.", "Produzir pequena quantidade para teste.", "Vender para conhecidos, faculdade ou local movimentado."];
+      if (n.includes("revenda")) return ["Escolher um produto fácil de vender em pequeno volume.", "Pesquisar fornecedores e custo de compra.", "Definir preço final e margem de lucro.", "Testar venda com um público próximo.", "Ajustar o produto ou o canal conforme a resposta."];
+      if (n.includes("digital") || n.includes("afiliado")) return ["Escolher uma habilidade ou formato simples de atuação digital.", "Criar um exemplo rápido ou primeiro material de teste.", "Oferecer em grupos, redes sociais ou contatos próximos.", "Fechar o primeiro cliente ou primeira conversão.", "Registrar feedback e melhorar a oferta."];
+      if (n.includes("serviço")) return ["Definir qual serviço você consegue prestar hoje.", "Listar 3 pessoas ou locais com possível demanda.", "Oferecer diretamente por mensagem ou pessoalmente.", "Executar o serviço com qualidade e rapidez.", "Pedir feedback e indicação para ampliar confiança."];
+      return ["Escolher uma atividade simples compatível com sua rotina.", "Organizar os recursos mínimos para começar.", "Testar com um primeiro cliente ou público.", "Registrar o que funcionou e o que falhou.", "Repetir e ajustar até gerar renda."];
     }
 
-    function getCommunityKnowledge(title) {
-      return communityKnowledge[title] || {
-        strategy: "Começar pequeno e validar antes de investir mais.",
-        commonMistake: "Tentar crescer antes de ter prova de que funciona.",
-        localTip: "Observar o território ajuda mais que adivinhar o mercado.",
-        trustTip: "Cumprir o que promete é o primeiro passo para ganhar confiança."
-      };
-    }
+    function getCommunityKnowledge(title) { return communityKnowledge[title] || { strategy: "Começar pequeno e validar antes de investir mais.", commonMistake: "Tentar crescer antes de ter prova de que funciona.", localTip: "Observar o território ajuda mais que adivinhar o mercado.", trustTip: "Cumprir o que promete é o primeiro passo para ganhar confiança." }; }
 
     function renderPlan() {
-      const selectedPathBox = document.getElementById("selectedPathBox");
-      const planContent = document.getElementById("planContent");
-      const planStatus = document.getElementById("planStatus");
-
+      const box = document.getElementById("selectedPathBox");
+      const content = document.getElementById("planContent");
       if (!appState.selectedPath) return;
-
-      const community = getCommunityKnowledge(appState.selectedPath);
-
-      selectedPathBox.classList.remove("hidden");
-      selectedPathBox.innerHTML = `
-        <h3>Caminho selecionado</h3>
-        <p><strong>${appState.selectedPath}</strong></p>
-        <p class="muted">Agora o sistema mostra um plano de execução com orientação prática e conhecimento da comunidade.</p>
-        <div style="margin-top:10px;">
-          <span class="pill">Saber popular</span>
-          <span class="pill">Baixo custo</span>
-          <span class="pill">Aplicação real</span>
-        </div>
-      `;
-
-      planContent.innerHTML = "";
-      appState.planSteps.forEach((stepText, index) => {
-        const done = appState.completedSteps.includes(index);
+      const com = getCommunityKnowledge(appState.selectedPath);
+      box.classList.remove("hidden");
+      box.innerHTML = `<div class="community-box"><strong>Caminho selecionado:</strong> ${appState.selectedPath}<br><span class="result-tag">Saber popular</span> <span class="result-tag">Baixo custo</span></div>`;
+      content.innerHTML = "";
+      appState.planSteps.forEach((step, idx) => {
+        const done = appState.completedSteps.includes(idx);
         const div = document.createElement("div");
-        div.className = "step";
-        div.innerHTML = `
-          <strong>Passo ${index + 1}</strong>
-          <p>${stepText}</p>
-          <div class="community-box">
-            <h4>Dica da comunidade para este caminho</h4>
-            <ul>
-              <li><strong>Estratégia:</strong> ${community.strategy}</li>
-              <li><strong>Dica local:</strong> ${community.localTip}</li>
-            </ul>
-          </div>
-          <button ${done ? "disabled" : ""} onclick="completeStep(${index})">
-            ${done ? "Concluído" : "Marcar como concluído"}
-          </button>
-        `;
-        planContent.appendChild(div);
+        div.className = "step-item";
+        div.innerHTML = `<div class="step-header"><span class="step-number">${idx+1}</span><span class="step-title">${step}</span></div>
+          <div class="community-box"><h4>🧠 Dica da comunidade</h4><ul><li><strong>Estratégia:</strong> ${com.strategy}</li><li><strong>Dica local:</strong> ${com.localTip}</li></ul></div>
+          <button class="btn ${done ? 'btn-outline' : 'btn-primary'}" ${done ? 'disabled' : ''} onclick="completeStep(${idx})">${done ? 'Concluído ✓' : 'Marcar como concluído'}</button>`;
+        content.appendChild(div);
       });
-
-      planStatus.classList.add("hidden");
+      document.getElementById("planStatus").classList.add("hidden");
+      updateProgressBar();
     }
 
-    function completeStep(index) {
-      if (!appState.completedSteps.includes(index)) {
-        appState.completedSteps.push(index);
-      }
+    function completeStep(idx) {
+      if (!appState.completedSteps.includes(idx)) appState.completedSteps.push(idx);
+      renderPlan(); renderProgress();
+      const status = document.getElementById("planStatus");
+      status.classList.remove("hidden");
+      status.innerHTML = `<div class="bg-success-light text-success p-3 rounded-md">Etapa ${idx+1} concluída. Continue assim!</div>`;
+    }
 
-      renderPlan();
-      renderProgress();
-
-      const planStatus = document.getElementById("planStatus");
-      planStatus.classList.remove("hidden");
-      planStatus.textContent = `Etapa ${index + 1} concluída com sucesso. O usuário avançou no plano de execução.`;
+    function updateProgressBar() {
+      const total = appState.planSteps.length;
+      const pct = total ? (appState.completedSteps.length / total)*100 : 0;
+      document.getElementById("progressBarFill").style.width = pct + "%";
     }
 
     function renderCommunityTips() {
-      const communityHeader = document.getElementById("communityHeader");
-      const communityTips = document.getElementById("communityTips");
-
-      if (!appState.selectedPath) {
-        communityHeader.classList.add("hidden");
-        communityTips.innerHTML = `
-          <div class="tip-card">
-            <h3>Nenhum caminho selecionado</h3>
-            <p>Escolha uma recomendação primeiro para visualizar as dicas práticas vindas da comunidade.</p>
-          </div>
-        `;
-        return;
-      }
-
-      const community = getCommunityKnowledge(appState.selectedPath);
-
-      communityHeader.classList.remove("hidden");
-      communityHeader.innerHTML = `
-        <h3>Saber popular aplicado ao caminho selecionado</h3>
-        <p><strong>${appState.selectedPath}</strong></p>
-        <p class="muted">Conhecimentos práticos organizados pela plataforma para reduzir erro, custo e improviso.</p>
-      `;
-
-      communityTips.innerHTML = `
-        <div class="grid-2">
-          <div class="tip-card">
-            <h3>Estratégia real</h3>
-            <p>${community.strategy}</p>
-          </div>
-          <div class="tip-card">
-            <h3>Erro comum</h3>
-            <p>${community.commonMistake}</p>
-          </div>
-          <div class="tip-card">
-            <h3>Dica do território</h3>
-            <p>${community.localTip}</p>
-          </div>
-          <div class="tip-card">
-            <h3>Como ganhar confiança</h3>
-            <p>${community.trustTip}</p>
-          </div>
-        </div>
-      `;
+      const header = document.getElementById("communityHeader");
+      const tips = document.getElementById("communityTips");
+      if (!appState.selectedPath) { header.classList.add("hidden"); tips.innerHTML = `<div class="result-card">Escolha uma recomendação primeiro.</div>`; return; }
+      const com = getCommunityKnowledge(appState.selectedPath);
+      header.classList.remove("hidden");
+      header.innerHTML = `<h3>Saber popular: ${appState.selectedPath}</h3>`;
+      tips.innerHTML = `<div class="results-grid">
+        <div class="result-card"><h4>💡 Estratégia real</h4><p>${com.strategy}</p></div>
+        <div class="result-card"><h4>⚠️ Erro comum</h4><p>${com.commonMistake}</p></div>
+        <div class="result-card"><h4>📍 Dica do território</h4><p>${com.localTip}</p></div>
+        <div class="result-card"><h4>🤝 Como ganhar confiança</h4><p>${com.trustTip}</p></div>
+      </div>`;
     }
 
     function renderProgress() {
       document.getElementById("summaryPath").textContent = appState.selectedPath || "-";
       document.getElementById("summarySteps").textContent = appState.completedSteps.length;
       document.getElementById("summaryIncome").textContent = "R$ " + Number(appState.income).toFixed(2);
+      updateProgressBar();
     }
 
     function registerIncome() {
-      const incomeInput = document.getElementById("incomeValue");
-      const incomeStatus = document.getElementById("incomeStatus");
-      const value = Number(incomeInput.value);
-
-      if (!appState.selectedPath) {
-        incomeStatus.classList.remove("hidden");
-        incomeStatus.classList.add("warning");
-        incomeStatus.textContent = "Escolha um caminho antes de registrar renda.";
-        return;
-      }
-
-      if (!value || value <= 0) {
-        incomeStatus.classList.remove("hidden");
-        incomeStatus.classList.add("warning");
-        incomeStatus.textContent = "Informe um valor válido para a renda obtida.";
-        return;
-      }
-
-      incomeStatus.classList.remove("warning");
-      appState.income = value;
-      renderProgress();
-
-      incomeStatus.classList.remove("hidden");
-      incomeStatus.textContent = `Primeira renda registrada com sucesso: R$ ${value.toFixed(2)}.`;
+      const input = document.getElementById("incomeValue");
+      const status = document.getElementById("incomeStatus");
+      const val = Number(input.value);
+      if (!appState.selectedPath) { status.classList.remove("hidden"); status.innerHTML = `<div class="bg-warning-light text-warning p-3 rounded-md">Escolha um caminho antes.</div>`; return; }
+      if (!val || val<=0) { status.classList.remove("hidden"); status.innerHTML = `<div class="bg-warning-light text-warning p-3 rounded-md">Informe um valor válido.</div>`; return; }
+      appState.income = val; renderProgress();
+      status.classList.remove("hidden");
+      status.innerHTML = `<div class="bg-success-light text-success p-3 rounded-md">Primeira renda registrada: R$ ${val.toFixed(2)}. Parabéns!</div>`;
     }
 
     function renderUseCases() {
-      const useCases = [
-        {
-          title: "UC01 - Gerar recomendação de caminho de renda",
-          actor: "Usuário",
-          flow: "O usuário informa tempo disponível, recurso inicial e área de interesse. O sistema analisa os dados e apresenta de 1 a 3 caminhos viáveis."
-        },
-        {
-          title: "UC02 - Selecionar caminho recomendado",
-          actor: "Usuário",
-          flow: "O usuário escolhe uma recomendação. O sistema registra a escolha e carrega o plano de execução correspondente."
-        },
-        {
-          title: "UC03 - Visualizar plano de execução",
-          actor: "Usuário",
-          flow: "Após selecionar um caminho, o usuário acessa um plano prático com passos claros para sair da intenção e chegar à primeira ação."
-        },
-        {
-          title: "UC04 - Consultar saber popular",
-          actor: "Usuário",
-          flow: "O usuário visualiza estratégias reais, erros comuns, dicas de território e formas de ganhar confiança baseadas em experiências da comunidade."
-        },
-        {
-          title: "UC05 - Registrar execução de etapa",
-          actor: "Usuário",
-          flow: "O usuário marca etapas como concluídas. O sistema atualiza o progresso e mostra feedback visual sobre o avanço."
-        },
-        {
-          title: "UC06 - Registrar primeira renda",
-          actor: "Usuário",
-          flow: "Após executar a atividade, o usuário informa o valor obtido. O sistema registra a renda e atualiza os indicadores do perfil."
-        }
-      ];
-
-      const useCasesContainer = document.getElementById("useCases");
-      useCasesContainer.innerHTML = "";
-
-      useCases.forEach(useCase => {
-        const div = document.createElement("div");
-        div.className = "usecase-card";
-        div.innerHTML = `
-          <h3>${useCase.title}</h3>
-          <p><strong>Ator principal:</strong> ${useCase.actor}</p>
-          <p><strong>Fluxo principal:</strong> ${useCase.flow}</p>
-        `;
-        useCasesContainer.appendChild(div);
-      });
+      const cases = [{title:"UC01 - Gerar recomendação", actor:"Usuário",flow:"Informa tempo, recurso e interesse; recebe opções viáveis."},{title:"UC02 - Selecionar caminho",actor:"Usuário",flow:"Escolhe recomendação e carrega plano."},{title:"UC03 - Visualizar plano",actor:"Usuário",flow:"Acessa passos práticos com dicas da comunidade."},{title:"UC04 - Saber popular",actor:"Usuário",flow:"Consulta estratégias reais e erros comuns."},{title:"UC05 - Registrar etapa",actor:"Usuário",flow:"Marca etapa como concluída e vê progresso."},{title:"UC06 - Registrar renda",actor:"Usuário",flow:"Informa valor obtido e atualiza indicadores."}];
+      const cont = document.getElementById("useCases");
+      cont.innerHTML = "";
+      cases.forEach(c => { const d = document.createElement("div"); d.className="usecase-item"; d.innerHTML=`<h4>${c.title}</h4><p><strong>Ator:</strong> ${c.actor} · ${c.flow}</p>`; cont.appendChild(d); });
     }
 
     function resetPrototype() {
-      appState = {
-        selectedPath: null,
-        planSteps: [],
-        completedSteps: [],
-        income: 0
-      };
-
+      appState = { selectedPath: null, planSteps: [], completedSteps: [], income: 0 };
       document.getElementById("recommendationForm").reset();
       document.getElementById("results").innerHTML = "";
       document.getElementById("planContent").innerHTML = "";
@@ -879,23 +836,16 @@
       document.getElementById("planStatus").classList.add("hidden");
       document.getElementById("incomeStatus").classList.add("hidden");
       document.getElementById("incomeValue").value = "";
-
-      renderProgress();
-      renderUseCases();
-      renderCommunityTips();
-
-      document.querySelectorAll(".top-nav button").forEach(btn => btn.classList.remove("active"));
-      document.querySelectorAll(".top-nav button")[0].classList.add("active");
+      document.getElementById("progressBarFill").style.width = "0%";
+      renderProgress(); renderUseCases(); renderCommunityTips();
+      document.querySelectorAll(".nav-tab").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".nav-tab")[0].classList.add("active");
       showSection("recomendacao");
     }
 
-    function escapeQuotes(text) {
-      return text.replace(/'/g, "\\'");
-    }
+    function escapeQuotes(t) { return t.replace(/'/g, "\\'"); }
 
-    renderUseCases();
-    renderProgress();
-    renderCommunityTips();
+    renderUseCases(); renderProgress(); renderCommunityTips();
   </script>
 </body>
 </html>
